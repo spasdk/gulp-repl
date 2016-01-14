@@ -1,0 +1,29 @@
+{
+    "name": "spa-gulp-repl",
+    "version": "1.3.0",
+    "description": "Read-eval-print loop task.",
+    "author": {
+        "name": "Stanislav Kalashnik",
+        "email": "darkpark.main@gmail.com"
+    },
+    "repository": "spasdk/gulp-repl",
+    "scripts": {
+        "lint": "eslint *.js",
+        "jsdoc": "jsdoc --destination doc *.js readme.md"
+    },
+    "dependencies": {
+        "del": "2.*.*",
+        "gulp-repl": "0.*.*",
+        "spa-gulp": "1.*.*"
+    },
+    "keywords": [
+        "spa",
+        "spasdk",
+        "framework",
+        "gulp",
+        "develop",
+        "task",
+        "repl"
+    ],
+    "license": "GPL-3.0"
+}
