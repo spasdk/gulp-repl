@@ -11,6 +11,13 @@
 var gulp = require('gulp');
 
 
+// task set was turned off in gulp.js
+if ( !config ) {
+    // do not create tasks
+    return;
+}
+
+
 // start loop
 gulp.task('repl', function ( done ) {
     var repl = require('gulp-repl');
