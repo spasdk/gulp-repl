@@ -14,22 +14,20 @@ var Plugin = require('spa-gulp/lib/plugin'),
 
 // create tasks for profiles
 plugin.profiles.forEach(function ( profile ) {
-    profile.watch(
-        // main entry task
-        profile.task(plugin.entry, function ( done ) {
-            var repl = require('gulp-repl');
+    // main entry task
+    profile.task(plugin.entry, function ( done ) {
+        var repl = require('gulp-repl');
 
-            // no unnecessary prompts
-            repl.setPrompt(profile.data.prompt);
+        // no unnecessary prompts
+        repl.setPrompt(profile.data.prompt);
 
-            // Ctrl+C was pressed
-            repl.on('SIGINT', function () {
-                process.exit();
+        // Ctrl+C was pressed
+        repl.on('SIGINT', function () {
+            process.exit();
 
-                done();
-            });
-        })
-    );
+            done();
+        });
+    });
 });
 
 
