@@ -8,27 +8,30 @@
 
 'use strict';
 
-var gulp = require('gulp');
+var Plugin = require('spa-gulp/lib/plugin'),
+    plugin = new Plugin({name: 'repl', entry: 'serve', context: module});
 
 
-// task set was turned off in gulp.js
-if ( !config ) {
-    // do not create tasks
-    return;
-}
+// create tasks for profiles
+plugin.profiles.forEach(function ( profile ) {
+    profile.watch(
+        // main entry task
+        profile.task(plugin.entry, function ( done ) {
+            var repl = require('gulp-repl');
 
+            // no unnecessary prompts
+            repl.setPrompt(profile.data.prompt);
 
-// start loop
-gulp.task('repl', function ( done ) {
-    var repl = require('gulp-repl');
+            // Ctrl+C was pressed
+            repl.on('SIGINT', function () {
+                process.exit();
 
-    // no unnecessary prompts
-    repl.setPrompt('');
-
-    // Ctrl+C was pressed
-    repl.on('SIGINT', function () {
-        process.exit();
-
-        done();
-    });
+                done();
+            });
+        })
+    );
 });
+
+
+// public
+module.exports = plugin;
