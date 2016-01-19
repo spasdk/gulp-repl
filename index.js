@@ -14,19 +14,26 @@ var Plugin = require('spa-gulp/lib/plugin'),
 
 // create tasks for profiles
 plugin.profiles.forEach(function ( profile ) {
+    var repl;
+
     // main entry task
     profile.task(plugin.entry, function ( done ) {
-        var repl = require('gulp-repl');
+        repl = require('gulp-repl');
 
         // no unnecessary prompts
         repl.setPrompt(profile.data.prompt);
 
-        // Ctrl+C was pressed
-        repl.on('SIGINT', function () {
-            process.exit();
+        // stop task invoke
+        repl.on('close', done);
 
-            done();
-        });
+        // Ctrl+C was pressed
+        repl.on('SIGINT', process.exit);
+    });
+
+    profile.task('stop', function () {
+        if ( repl ) {
+            repl.close();
+        }
     });
 });
 
