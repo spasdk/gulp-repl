@@ -23,6 +23,13 @@ plugin.profiles.forEach(function ( profile ) {
         // no unnecessary prompts
         repl.setPrompt(profile.data.prompt);
 
+        // report
+        profile.notify({
+            info: 'serve '.green + 'read-eval-print loop'.bold,
+            title: plugin.entry,
+            message: 'read-eval-print loop'
+        });
+
         // stop task invoke
         repl.on('close', done);
 
@@ -32,6 +39,13 @@ plugin.profiles.forEach(function ( profile ) {
 
     profile.task('stop', function () {
         if ( repl ) {
+            // report
+            profile.notify({
+                info: 'stop '.green + 'read-eval-print loop'.bold,
+                title: 'stop',
+                message: 'read-eval-print loop'
+            });
+
             repl.close();
         }
     });
