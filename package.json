@@ -14,7 +14,7 @@
     "dependencies": {
         "del": "2.*.*",
         "gulp-repl": "0.*.*",
-        "spa-gulp": "1.*.*"
+        "spa-gulp": "spasdk/gulp"
     },
     "keywords": [
         "spa",
